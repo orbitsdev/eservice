@@ -1,4 +1,5 @@
 import 'package:eservice/screens/auth/signup_screen.dart';
+import 'package:eservice/screens/auth/terms_and_condition.dart';
 import 'package:eservice/screens/widgets/vertical_space.dart';
 import 'package:eservice/theme/theme_constant.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +104,7 @@ const StartScreen({ Key? key }) : super(key: key);
                                 ),
                               ),
                               onPressed: () {
-                                Get.to(()=> const SignupScreen(), transition: Transition.downToUp);
+                                Get.to(()=> const TermsAndCondition(), transition: Transition.downToUp);
                               },
                               child: const Text(
                                 'Sign Up',

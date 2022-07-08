@@ -75,7 +75,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Didn\'t you recieve any code? ', style: TextStyle(color: gcash_blue4, )),
+                    Text('Didn\'t you recieve any code? ', style: TextStyle( )),
                     GestureDetector(
                       onTap: (){
                         

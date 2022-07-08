@@ -1,4 +1,5 @@
 import 'package:eservice/routes/app_name.dart';
+import 'package:eservice/screens/auth/controller/authcontroller.dart';
 import 'package:eservice/screens/auth/otp_screen.dart';
 import 'package:eservice/screens/auth/signin_screen.dart';
 import 'package:eservice/screens/auth/signup_screen.dart';
@@ -11,10 +12,16 @@ import 'package:eservice/screens/body/bodyscreens/profile_screen.dart';
 import 'package:eservice/screens/body/bodyscreens/search_services_screen.dart';
 import 'package:eservice/screens/body/bodyscreens/services._screen.dart';
 import 'package:eservice/screens/start_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() {
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp().then((value) {
+    Get.put(Authcontroller(), permanent: true);
+  });
+  
   runApp(const EserviceApp());
 }
 

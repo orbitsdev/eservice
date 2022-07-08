@@ -1,4 +1,3 @@
-import 'package:eservice/constant/controllers.dart';
 import 'package:eservice/dialogs/app.dart';
 import 'package:eservice/screens/auth/controller/authcontroller.dart';
 import 'package:eservice/screens/auth/terms_and_condition.dart';
@@ -11,7 +10,6 @@ import 'package:eservice/screens/widgets/vertical_space.dart';
 import 'package:eservice/screens/widgets/whit_line.dart';
 import 'package:eservice/theme/theme_constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -19,16 +17,15 @@ import 'package:lottie/lottie.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class SignupScreen extends StatefulWidget {
-  const SignupScreen({ Key? key }) : super(key: key);
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
-  _SignupScreenState createState() => _SignupScreenState();
+  State<SignupScreen> createState() => _SignupScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMixin {
-
-  int phoneinputlength = 10;
-  
+class _SignupScreenState extends State<SignupScreen>
+    with TickerProviderStateMixin {
+  var authcontroller = Get.put(Authcontroller());
   TextEditingController firstname = TextEditingController();
   TextEditingController lastname = TextEditingController();
   TextEditingController middlename = TextEditingController();
@@ -58,7 +55,7 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
     email.addListener(onListen);
     password.addListener(onListen);
     retypepassword.addListener(onListen);
-    authcontroller.getRegions();
+
     super.initState();
   }
 
@@ -75,94 +72,87 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
   }
 
   void onListen() => setState(() {});
-  
+
   @override
   Widget build(BuildContext context) {
- var mediquery = MediaQuery.of(context);
+    var mediquery = MediaQuery.of(context);
     double? appbarsize = mediquery.padding.top + AppBar().preferredSize.height + 50;
+    double? containersize = mediquery.size.height - appbarsize ;
     return GestureDetector(
-      onTap: ()=> FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         backgroundColor: const Color(0xffFFFFFF),
         appBar: AppBar(
-            backgroundColor: gcash_blue1,
-            title: const Text('Sign up'),
-            leading: IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: const FaIcon(FontAwesomeIcons.angleLeft,
-                    color: purewhitebackground)),
+          backgroundColor: gcash_blue1,
+          title: const Text('Sign up'),
+          leading: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: const FaIcon(FontAwesomeIcons.angleLeft,
+                  color: purewhitebackground)),
+        ),
+        body: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(
+            vertical: screenPadding,
+            horizontal: 25,
           ),
-        body: Column(
-          children: [
-         
-             Container(
-              padding: EdgeInsets.symmetric(horizontal:20,vertical: 12),
-               child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SmoothPageIndicator(
-                            controller: pagecontroller,
-                            count: 3,
-                            effect: const ExpandingDotsEffect(
-                                spacing: 8,
-                                dotColor: input_background_ligt,
-                                activeDotColor: gcash_blue1)),
-                        Container(
-                          child: Text(
-                            '${pageindex + 1}/3',
-                            style: Get.textTheme.bodyText1!.copyWith(
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.w600,
-                                color: gcash_blue1),
-                          ),
-                        ),
-                      ],
-                    ),
-             ),
-            Expanded(
-             
-              child: SingleChildScrollView(
-                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              child: Column(  
-                children: [
-                  
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20,),
-                    height: MediaQuery.of(context).size.height - appbarsize,
-                    child: PageView(
-                  
-                  onPageChanged: (int index) {
-                    setState(() {
-                      pageindex = index;
-                    });
-                  },
-                  physics: const NeverScrollableScrollPhysics(),
-                  controller: pagecontroller,
+          keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+          child: Form(
+            key: _formkey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    firstStepBuilder(),
-                    secondStepBuilder(),
-                    thirStepBuilder()
+                    SmoothPageIndicator(
+                        controller: pagecontroller,
+                        count: 3,
+                        effect: const ExpandingDotsEffect(
+                            spacing: 8,
+                            dotColor: input_background_ligt,
+                            activeDotColor: gcash_blue1)),
+                    Container(
+                      child: Text(
+                        '${pageindex + 1}/3',
+                        style: Get.textTheme.bodyText1!.copyWith(
+                            fontFamily: 'Roboto',
+                            fontWeight: FontWeight.w600,
+                            color: gcash_blue1),
+                      ),
+                    ),
                   ],
                 ),
+                Container(
+                  height:containersize != null ? containersize :300 ,
+                  child: PageView(
+                    onPageChanged: (int index) {
+                      setState(() {
+                        pageindex = index;
+                      });
+                    },
+                    physics: const NeverScrollableScrollPhysics(),
+                    controller: pagecontroller,
+                    children: [
+                      firstStepBuilder(),
+                      secondStepBuilder(),
+                      thirStepBuilder()
+                    ],
                   ),
-                ],
-              ),
-            ))
-
-                
-                
-            
-          ],
+                )
+              ],
+            ),
+          ),
         ),
-         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: floatingButtonBuilder(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: floatingButtonBuilder(),
       ),
     );
   }
-   Container floatingButtonBuilder() {
+
+  Container floatingButtonBuilder() {
     return Container(
       color: const Color(0xffFFFFFF),
       padding: const EdgeInsets.symmetric(
@@ -223,10 +213,9 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
                         checkAndProceed();
                       },
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12,),
+                        padding: const EdgeInsets.all(12),
                         child: Text(
-                          pageindex == 2? 
-                          'Create Account' : "Continue",
+                          'Continue',
                           style: lightheadline6.copyWith(fontSize: 18),
                         ),
                       ),
@@ -274,21 +263,20 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
         break;
 
       case 1:
-        // if (authcontroller.region == null ||
-        //     authcontroller.province == null ||
-        //     authcontroller.city == null ||
-        //     authcontroller.barangay == null) {
-        //   App.showChecker(
-        //       context, 'Please fill out all fields before pressiong continue');
-        // } else {
-        //   proceed();
-        // }
-         proceed();
+        if (authcontroller.region == null ||
+            authcontroller.province == null ||
+            authcontroller.city == null ||
+            authcontroller.barangay == null) {
+          App.showChecker(
+              context, 'Please fill out all fields before pressiong continue');
+        } else {
+          proceed();
+        }
 
         break;
 
-      case 2:      
-          authcontroller.registerUser(phonenumber.text);
+      case 2:
+        Get.to(()=> TermsAndCondition(),);
         break;
     }
 
@@ -319,7 +307,7 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             VerticalSpace(height: 16),
+            VerticalSpace(height: 24),
             Text('Login Number'.toUpperCase(),
                 style: TextStyle(
                     fontSize: 20,
@@ -346,9 +334,9 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
 
                 Lottie.asset('assets/images/97981-hand-holding-phone.json', height: 170),
                 VerticalSpace(height: 24),
-                Text('We will send you one Time Password '),
+                Text('We will send you an One Time Password '),
                 Text(
-                  'Enter Mobile Number',
+                  'Enter Mobile Phone',
                   style: TextStyle(color: Colors.grey[500]),
                 ),
                 // Image.asset(
@@ -356,15 +344,7 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
                 //   width: 34,
                 //   height: 34,
                 // ),
-            TextFormField(
-              inputFormatters: [
-                 FilteringTextInputFormatter.digitsOnly
-              ],
-              onChanged: (value){
-                  authcontroller.phonenumber = value;
-              },
-              controller: phonenumber,
-              maxLength: 10,
+            TextField(
             textAlignVertical: TextAlignVertical.center,
       keyboardType: TextInputType.phone,
       textInputAction: TextInputAction.done,
@@ -383,7 +363,7 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
                 height: 34,
               ),
               HorizontalSpace(width: 6),
-              Text('+63'),
+            Text('+63'),
               HorizontalSpace(width: 8),
             
           ],
@@ -392,12 +372,7 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
     
                
                 ),
-                if(authcontroller.phonenumber.length == 10)
-              infoIcon(FontAwesomeIcons.check , 'Everything seems good', Colors.green[600]),
-              if(authcontroller.phonenumber !="" && authcontroller.phonenumber.length != 10 )
-              infoIcon(FontAwesomeIcons.exclamationCircle, 'Invalid number length', Colors.red[400])
-              
-              ],    
+              ],
             ),
             Container(
               margin: EdgeInsets.only(bottom: 5),
@@ -522,23 +497,13 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
     );
   }
 
-  Row infoIcon(IconData icon, String message, Color? color) {
-    return Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FaIcon(icon, color: color,size: 20,), HorizontalSpace(width: 4),
-                  Flexible(child: Text(message, style: TextStyle(fontSize: 13, color: color),)),
-                ],
-              );
-  }
-
   Widget secondStepBuilder() {
     return GetBuilder<Authcontroller>(
       builder: (controller) {
         if (authcontroller.regions.length == 0) {
           return Column(
             children: [
-              VerticalSpace(height: 16),
+              VerticalSpace(height: 24),
               Container(
                 height: 260,
                 child: Image.asset(
@@ -546,7 +511,6 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
                   fit: BoxFit.cover,
                 ),
               ),
-             
               SizedBox(
                 child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
@@ -566,13 +530,13 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              VerticalSpace(height: 16),
+              VerticalSpace(height: 24),
               Text('Adress Details'.toUpperCase(),
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w500,
                       color: Colors.grey[900])),
-              VerticalSpace(height: 8),
+              const VerticalSpace(height: 8),
 
               //if(controller.province==null)
               BlueCard(
@@ -763,7 +727,7 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        VerticalSpace(height: 16),
+        VerticalSpace(height: 24),
         Text('Basic Details'.toUpperCase(),
             style: TextStyle(
                 fontSize: 20,

@@ -8,23 +8,22 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class SigninScreen extends StatefulWidget {
-const SigninScreen({ Key? key }) : super(key: key);
+  const SigninScreen({Key? key}) : super(key: key);
 
   @override
   State<SigninScreen> createState() => _SigninScreenState();
 }
 
 class _SigninScreenState extends State<SigninScreen> {
-
-   final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
- bool _showPassword = true;
+  bool _showPassword = true;
 
   @override
-  Widget build(BuildContext context){
-     return SafeArea(
+  Widget build(BuildContext context) {
+    return SafeArea(
       child: Scaffold(
         backgroundColor: background,
         body: SingleChildScrollView(
@@ -38,14 +37,12 @@ class _SigninScreenState extends State<SigninScreen> {
                   child: Image.asset('assets/images/layer.png'),
                 ),
                 TextFormField(
-                  
                   controller: email,
                   cursorColor: input__icon_background,
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
-                  
-                  contentPadding: const EdgeInsets.all(16),
+                    contentPadding: const EdgeInsets.all(16),
                     suffixIcon: email.text.isEmpty
                         ? null
                         : IconButton(
@@ -66,16 +63,17 @@ class _SigninScreenState extends State<SigninScreen> {
                     filled: true,
                     fillColor: input_background,
                     border: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(inputradius)),
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(inputradius)),
                       borderSide: BorderSide(
-                        
                         color: Colors.transparent,
                       ),
                     ),
                     label: Text('Email', style: lightbody1),
                     labelStyle: lightbody2,
                     focusedBorder: const OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(inputradius)),
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(inputradius)),
                       borderSide: BorderSide(
                         color: input__icon_background,
                       ),
@@ -88,34 +86,35 @@ class _SigninScreenState extends State<SigninScreen> {
                   controller: password,
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
-                  obscureText: _showPassword ,
+                  obscureText: _showPassword,
                   cursorColor: input__icon_background,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(16),
-                    suffixIcon:  Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    if(password.text.isNotEmpty) IconButton(
-                                        onPressed: () {
-                                          password.clear();
-                                        },
-                                        icon:  const Icon(
-                                           Icons.close,
-                                          color: input__icon_background,
-                                        )),
-                                    IconButton(
-                                        onPressed: () {
-                                          setState(() => _showPassword = ! _showPassword);
-                                        },
-                                        icon:  FaIcon(
-                                           _showPassword 
-                                           ?FontAwesomeIcons.eyeSlash
-                                           :FontAwesomeIcons.eye,
-                                          color: input__icon_background,
-                                        )),
-                                  ],
-                                ),
+                    suffixIcon: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        if (password.text.isNotEmpty)
+                          IconButton(
+                              onPressed: () {
+                                password.clear();
+                              },
+                              icon: const Icon(
+                                Icons.close,
+                                color: input__icon_background,
+                              )),
+                        IconButton(
+                            onPressed: () {
+                              setState(() => _showPassword = !_showPassword);
+                            },
+                            icon: FaIcon(
+                              _showPassword
+                                  ? FontAwesomeIcons.eyeSlash
+                                  : FontAwesomeIcons.eye,
+                              color: input__icon_background,
+                            )),
+                      ],
+                    ),
                     prefixIcon: Container(
                         margin: const EdgeInsets.only(left: 5),
                         height: 40,
@@ -126,7 +125,8 @@ class _SigninScreenState extends State<SigninScreen> {
                     filled: true,
                     fillColor: input_background,
                     border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(inputradius)),
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(inputradius)),
                       borderSide: BorderSide(
                         color: Colors.transparent,
                       ),
@@ -134,7 +134,8 @@ class _SigninScreenState extends State<SigninScreen> {
                     label: Text('Password', style: lightbody1),
                     labelStyle: lightbody2,
                     focusedBorder: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(inputradius)),
+                      borderRadius:
+                          BorderRadius.all(Radius.circular(inputradius)),
                       borderSide: BorderSide(
                         color: input__icon_background,
                       ),
@@ -144,14 +145,16 @@ class _SigninScreenState extends State<SigninScreen> {
                 ),
                 const VerticalSpace(height: 24),
                 Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20,),
+                  margin: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                  ),
                   child: Column(
                     children: [
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            Get.to(()=> const AppMainScreen());
+                            Get.to(() => const AppMainScreen());
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(12),
@@ -163,9 +166,9 @@ class _SigninScreenState extends State<SigninScreen> {
                           style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(button_background),
-                              shape:
-                                  MaterialStateProperty.all<RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(100),
                               ))),
                         ),
@@ -178,7 +181,7 @@ class _SigninScreenState extends State<SigninScreen> {
                               height: 1,
                               width: 40,
                               color: Colors.grey[600],
-                            ),  
+                            ),
                             Container(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 6,
@@ -208,27 +211,31 @@ class _SigninScreenState extends State<SigninScreen> {
                     ],
                   ),
                 ),
-                 const VerticalSpace(height: 10),
+                const VerticalSpace(height: 10),
                 Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text('Don\'t Have an account?', style: TextStyle(color: Colors.white,)),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          InkWell(
-                            onTap: () {
-                                Get.to(()=> const SignupScreen(), transition:Transition.rightToLeft);
-                            },
-                            child: const Text(
-                              'Sign Up',
-                              style: TextStyle(color: input__icon_background, fontWeight: FontWeight.w700),
-                              
-                            ),
-                          )
-                        ],
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Don\'t Have an account?',
+                        style: TextStyle(
+                          color: Colors.white,
+                        )),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Get.to(() => const SignupScreen(),
+                            transition: Transition.rightToLeft);
+                      },
+                      child: const Text(
+                        'Sign Up',
+                        style: TextStyle(
+                            color: input__icon_background,
+                            fontWeight: FontWeight.w700),
                       ),
-
+                    )
+                  ],
+                ),
               ],
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:eservice/screens/auth/otp_screen.dart';
+import 'package:eservice/screens/auth/signup_screen.dart';
 import 'package:eservice/screens/body/app_main_screen.dart';
 import 'package:eservice/screens/widgets/horizontal_space.dart';
 import 'package:eservice/screens/widgets/vertical_space.dart';
@@ -95,14 +96,14 @@ class _TermsAndConditionState extends State<TermsAndCondition> {
                         Expanded(
                           child: ElevatedButton(
                             onPressed: _isagree ? (){
-                                Get.to(()=> const OtpScreen(), transition: Transition.downToUp);
+                                Get.to(()=> const SignupScreen(), transition: Transition.downToUp);
                             }: null,
                             child: Container(
 
                               padding: const EdgeInsets.symmetric( vertical: 12),
                               child: Center(
                                 child: Text(
-                                  'Create My Account',
+                                  'Continue',
                                   style: lightheadline6.copyWith(fontSize: 18),
                                 ),
                               ),

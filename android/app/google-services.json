@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "557538614363",
+    "project_id": "eservice-cfcb0",
+    "storage_bucket": "eservice-cfcb0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557538614363:android:807a6f866a05e34265b37e",
+        "android_client_info": {
+          "package_name": "com.orbinobrian.eservice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557538614363-6sqn8b5mbhmpdeucp3al0hhg2371lm2a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhlNaoo_Em88EsRu0z__lDPrJEb-k5SU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557538614363-6sqn8b5mbhmpdeucp3al0hhg2371lm2a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
