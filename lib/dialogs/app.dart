@@ -1,3 +1,5 @@
+import 'package:eservice/constant/controllers.dart';
+import 'package:eservice/constant/fbase.dart';
 import 'package:eservice/dialogs/dialogwidgets/option_listtile.dart';
 import 'package:eservice/screens/body/bodyscreens/profile_screen.dart';
 import 'package:eservice/screens/widgets/horizontal_space.dart';
@@ -9,7 +11,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 class App {
- static void showChnageProfileOption(
+ static void showChangeProfileOption(
       BuildContext context, Function pickimage) {
     showModalBottomSheet(
       context: context,
@@ -121,6 +123,7 @@ static void showChecker(BuildContext context, String message){
       ),
     ));
 }
+
 static void showError({String? title = "Ops", String? description ="Something went wrong"}){
 
       Get.dialog(
@@ -135,6 +138,27 @@ static void showError({String? title = "Ops", String? description ="Something we
             Text(description?? ''),
             TextButton(onPressed: (){
                 Get.back();
+            }, child: Text('Ok'))
+                  ],
+                ),
+          ),
+        )
+      );
+}
+static void showExitDialog({String? title = "Sorry", String? description ="Your number is not register"}){
+
+      Get.dialog(
+        Dialog(
+          child: Padding(
+            padding: EdgeInsets.all(8),
+            child: Column(
+              
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+            Text(title ?? ''),
+            Text(description?? ''),
+            TextButton(onPressed: (){
+              Get.back();
             }, child: Text('Ok'))
                   ],
                 ),
@@ -288,7 +312,9 @@ static void showCuperTinoDate(BuildContext context, Function setDate,Function se
                   ),
                 )),
             CupertinoActionSheetAction(
-                onPressed: () {},
+                onPressed: () {
+                  authcontroller.logout();
+                },
                 child: const Text(
                   'Logout',
                   style: TextStyle(color: gcash_blue1),

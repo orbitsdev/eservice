@@ -1,3 +1,4 @@
+import 'package:eservice/constant/controllers.dart';
 import 'package:flutter/material.dart';
 
 import 'package:eservice/screens/auth/animation/mpin_animation_controller.dart';
@@ -73,7 +74,7 @@ class _MpinWidgetState extends State<MpinWidget> {
         
 
         if(mpin.length ==  widget.pinLength){
-          print('completed');
+          authcontroller.otpcode = mpin;
         }
 
      
@@ -82,7 +83,7 @@ class _MpinWidgetState extends State<MpinWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: List.generate(widget.pinLength, (index) => PinAnimation(controller:  _animationController[index],) ),); 
   }
 }

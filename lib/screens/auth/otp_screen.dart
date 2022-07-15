@@ -1,17 +1,25 @@
-import 'package:eservice/screens/auth/animation/mpin_animation_controller.dart';
-import 'package:eservice/screens/auth/animation/mpin_widget.dart';
-import 'package:eservice/screens/auth/animation/pin_animation.dart';
-import 'package:eservice/screens/body/app_main_screen.dart';
-import 'package:eservice/screens/widgets/vertical_space.dart';
-import 'package:eservice/theme/theme_constant.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-class OtpScreen extends StatefulWidget {
-  const OtpScreen({Key? key}) : super(key: key);
+import 'package:eservice/constant/controllers.dart';
+import 'package:eservice/screens/auth/animation/mpin_animation_controller.dart';
+import 'package:eservice/screens/auth/animation/mpin_widget.dart';
+import 'package:eservice/screens/auth/animation/pin_animation.dart';
+import 'package:eservice/screens/auth/controller/authcontroller.dart';
+import 'package:eservice/screens/body/app_main_screen.dart';
+import 'package:eservice/screens/widgets/vertical_space.dart';
+import 'package:eservice/theme/theme_constant.dart';
 
+class OtpScreen extends StatefulWidget {
+  
+  ProcessType?  process;
+   OtpScreen({
+    Key? key,
+    this.process,
+  }) : super(key: key);
+ 
   @override
   _OtpScreenState createState() => _OtpScreenState();
 }
@@ -44,9 +52,9 @@ class _OtpScreenState extends State<OtpScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            VerticalSpace(height: 24),
-            MpinWidget(pinLength: 4, controller: animationController),
-            VerticalSpace(height: 24),
+            const VerticalSpace(height: 24),
+            MpinWidget(pinLength: 6, controller: animationController),
+            const VerticalSpace(height: 24),
             GridView.count(
                             physics: NeverScrollableScrollPhysics(),
               reverse: true,
@@ -66,7 +74,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 IconButton(onPressed: (){
             
                   animationController.delete!();
-                }, icon: FaIcon(FontAwesomeIcons.backspace, size: 34, color: gcash_blue1))
+                }, icon: const FaIcon(FontAwesomeIcons.backspace, size: 34, color: gcash_blue1))
               ],),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -75,21 +83,33 @@ class _OtpScreenState extends State<OtpScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Didn\'t you recieve any code? ', style: TextStyle( )),
+                    const Text('Didn\'t you recieve any code? ', style: TextStyle( )),
                     GestureDetector(
                       onTap: (){
                         
                       },
-                      child: Text('Resend', style: TextStyle(color: gcash_blue1, fontWeight: FontWeight.bold ))),
+                      child: const Text('Resend', style: TextStyle(color: gcash_blue1, fontWeight: FontWeight.bold ))),
                     
                   ],
                 ),
                 VerticalSpace(height: 16),
-                Container(
+
+                Obx((){
+                  if(authcontroller.isVerifyingPhoneNumber.isTrue){
+                    return const SizedBox(
+                          height: 24,
+                          width: 24,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: gcash_blue1,
+                          ),
+                        );
+                  }
+                   return  SizedBox(
                   width: MediaQuery.of(context).size.width * 0.40,
-                    child: ElevatedButton(
+                    child:  ElevatedButton(
                       onPressed: () {
-                        Get.to(()=> AppMainScreen());
+                      authcontroller.veriPhone(widget.process as ProcessType);
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(12),
@@ -107,7 +127,10 @@ class _OtpScreenState extends State<OtpScreen> {
                             borderRadius: BorderRadius.circular(100),
                           ))),
                     ),
-                  ),
+                  );
+                }),
+
+                
               ],
             )
           ],
@@ -123,10 +146,10 @@ class _OtpScreenState extends State<OtpScreen> {
       },
         child: ClipOval(
           child: Container(
-            height:66,
-            width: 66,
+            height:54,
+            width: 54,
             color: gcash_blue1,
-            child: Center(child: Text(input.toString(), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 34),)),
+            child: Center(child: Text(input.toString(), style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 24),)),
           ),
         ),
     );

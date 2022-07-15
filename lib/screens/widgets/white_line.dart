@@ -1,11 +1,11 @@
 import 'package:eservice/theme/theme_constant.dart';
 import 'package:flutter/material.dart';
 
-class WhitLine extends StatelessWidget {
+class WhiteLine extends StatelessWidget {
 
   final double thickness;
   
-  const WhitLine({
+  const WhiteLine({
     Key? key,
     required this.thickness,
   }) : super(key: key);

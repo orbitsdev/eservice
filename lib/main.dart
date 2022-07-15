@@ -1,7 +1,9 @@
+import 'package:eservice/constant/fbase.dart';
 import 'package:eservice/routes/app_name.dart';
 import 'package:eservice/screens/auth/controller/authcontroller.dart';
 import 'package:eservice/screens/auth/otp_screen.dart';
 import 'package:eservice/screens/auth/signin_screen.dart';
+import 'package:eservice/screens/auth/signin_screen_number.dart';
 import 'package:eservice/screens/auth/signup_screen.dart';
 import 'package:eservice/screens/body/app_main_screen.dart';
 import 'package:eservice/screens/body/bodyscreens/edit_personal_information_screen.dart';
@@ -16,37 +18,47 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-Future<void> main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp().then((value) {
     Get.put(Authcontroller(), permanent: true);
   });
-  
+
   runApp(const EserviceApp());
 }
 
 class EserviceApp extends StatelessWidget {
-const EserviceApp({ Key? key }) : super(key: key);
+  const EserviceApp({Key? key}) : super(key: key);
+
+  Widget authentication() {
+    if (auth.currentUser == null) {
+      return const StartScreen();
+    } else {
+     return  const AppMainScreen();
+    }
+  }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return GetMaterialApp(
-      home: SignupScreen(),
+      home: authentication(),
       getPages: [
-        GetPage(name: AppName.start, page: ()=> StartScreen()),
-        GetPage(name: AppName.sigin, page: ()=> SigninScreen()),
-        GetPage(name: AppName.signup, page: ()=> SignupScreen()),
-        GetPage(name: AppName.otp, page: ()=> OtpScreen()),
-        GetPage(name: AppName.main, page: ()=> AppMainScreen()),
-        GetPage(name: AppName.home, page: ()=> HomeScreen()),
-        GetPage(name: AppName.points, page: ()=> PointsScreen()),
-        GetPage(name: AppName.help, page: ()=> HelpScreen()),
-        GetPage(name: AppName.service, page: ()=> ServicesScreen()),
-        GetPage(name: AppName.searchservice, page: ()=> SearchServicesScreen()),
-        GetPage(name: AppName.profile, page: ()=> ProfileScreen()),
-        GetPage(name: AppName.editpersonalprofile, page: ()=> EditPersonalInformationScreen()),
-        
-
+        GetPage(name: AppName.start, page: () => StartScreen()),
+        GetPage(name: AppName.signinphone, page: () => SigninScreenNumber()),
+        GetPage(name: AppName.sigin, page: () => SigninScreen()),
+        GetPage(name: AppName.signup, page: () => SignupScreen()),
+        GetPage(name: AppName.otp, page: () => OtpScreen()),
+        GetPage(name: AppName.main, page: () => AppMainScreen()),
+        GetPage(name: AppName.home, page: () => HomeScreen()),
+        GetPage(name: AppName.points, page: () => PointsScreen()),
+        GetPage(name: AppName.help, page: () => HelpScreen()),
+        GetPage(name: AppName.service, page: () => ServicesScreen()),
+        GetPage(
+            name: AppName.searchservice, page: () => SearchServicesScreen()),
+        GetPage(name: AppName.profile, page: () => ProfileScreen()),
+        GetPage(
+            name: AppName.editpersonalprofile,
+            page: () => EditPersonalInformationScreen()),
       ],
       debugShowCheckedModeBanner: false,
     );

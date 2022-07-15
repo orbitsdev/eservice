@@ -38,7 +38,7 @@ class _PinAnimationState extends State<PinAnimation>
   void initState() {
     _controller =
         AnimationController(vsync: this, duration: Duration(milliseconds: 200));
-    _sizeAnimation = Tween<double>(begin: 40, end: 50).animate(_controller);
+    _sizeAnimation = Tween<double>(begin: 34, end: 40).animate(_controller);
     _opacityAnimation = Tween<double>(begin: 0, end: 1).animate(_controller);
     _colorAnimation = ColorTween(begin: bodywhitebackground, end: gcash_blue6).animate(_controller);
     _controller.addListener(() => setState(() {
@@ -64,9 +64,8 @@ class _PinAnimationState extends State<PinAnimation>
   @override
   Widget build(BuildContext context) {
     return Container(
-
-      height:64,
-      width:64,
+width: 40,
+height: 40,
       alignment: Alignment.center,
       child: Container(
         height: _sizeAnimation.value,

@@ -1,6 +1,7 @@
 class AppName {
 
 static const String start="/start";
+static const String signinphone="/signinphone";
 static const String signup="/signup";
 static const String sigin="/signin";
 static const String main="/main";

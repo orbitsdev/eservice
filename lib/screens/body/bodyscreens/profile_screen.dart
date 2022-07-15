@@ -5,7 +5,7 @@ import 'package:eservice/screens/body/bodyscreens/edit_personal_information_scre
 import 'package:eservice/screens/body/widgets/home/list_widget.dart';
 import 'package:eservice/screens/widgets/horizontal_space.dart';
 import 'package:eservice/screens/widgets/vertical_space.dart';
-import 'package:eservice/screens/widgets/whit_line.dart';
+import 'package:eservice/screens/widgets/white_line.dart';
 import 'package:eservice/theme/theme_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -90,40 +90,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             
-            const WhitLine(thickness: 1),
-            // Container(
-            //   color: purewhitebackground,
-            //   child:  Column(
-            //     children: [
-            //       ListTile(
-
-            //         dense: true,
-            //         title:  Text('Name'.toUpperCase()),
-            //         subtitle:  Text('Brian Orbino'.toUpperCase()),
-            //       ),
-            //       ListTile(
-            //         dense: true,
-            //         title:  Text('Name'.toUpperCase()),
-            //         subtitle:  Text('Brian Orbino'.toUpperCase()),
-            //       ),
-            //       ListTile(
-            //         dense: true,
-            //         title:  Text('Name'.toUpperCase()),
-            //         subtitle:  Text('Brian Orbino'.toUpperCase()),
-            //       ),
-
-            //     ],
-            //   ),
-            // ),
-             
-            // WhitLine(thickness: 1),
+            const WhiteLine(thickness: 1),
             
             Material(
               color: Colors.transparent,
               child: InkWell(
                  onTap: () async{
                     
-                    App.showChnageProfileOption(context,pickImage);
+                    App.showChangeProfileOption(context,pickImage);
                     },
                 child: const ListTileWidget(label: 'Change Profile Picture', icon: FontAwesomeIcons.camera),
               ),

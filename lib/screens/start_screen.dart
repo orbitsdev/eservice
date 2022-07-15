@@ -1,3 +1,4 @@
+import 'package:eservice/screens/auth/signin_screen_number.dart';
 import 'package:eservice/screens/auth/signup_screen.dart';
 import 'package:eservice/screens/auth/terms_and_condition.dart';
 import 'package:eservice/screens/widgets/vertical_space.dart';
@@ -82,7 +83,9 @@ const StartScreen({ Key? key }) : super(key: key);
                                   ),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(()=> const SigninScreenNumber());
+                              },
                               child: const Text(
                                 'Login',
                                 style: TextStyle(fontSize: 20, color: gcash_blue1),

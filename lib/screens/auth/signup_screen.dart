@@ -1,14 +1,16 @@
 import 'package:eservice/constant/controllers.dart';
 import 'package:eservice/dialogs/app.dart';
 import 'package:eservice/screens/auth/controller/authcontroller.dart';
+import 'package:eservice/screens/auth/signin_screen_number.dart';
 import 'package:eservice/screens/auth/terms_and_condition.dart';
 import 'package:eservice/screens/auth/widgets/datefieldcontent.dart';
 import 'package:eservice/screens/auth/widgets/default_dropdown.dart';
+import 'package:eservice/screens/auth/widgets/info_icon.dart';
 import 'package:eservice/screens/auth/widgets/textfield.dart';
 import 'package:eservice/screens/widgets/blue_card.dart';
 import 'package:eservice/screens/widgets/horizontal_space.dart';
 import 'package:eservice/screens/widgets/vertical_space.dart';
-import 'package:eservice/screens/widgets/whit_line.dart';
+import 'package:eservice/screens/widgets/white_line.dart';
 import 'package:eservice/theme/theme_constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,16 +21,16 @@ import 'package:lottie/lottie.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class SignupScreen extends StatefulWidget {
-  const SignupScreen({ Key? key }) : super(key: key);
+  const SignupScreen({Key? key}) : super(key: key);
 
   @override
   _SignupScreenState createState() => _SignupScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMixin {
-
+class _SignupScreenState extends State<SignupScreen>
+    with TickerProviderStateMixin {
   int phoneinputlength = 10;
-  
+
   TextEditingController firstname = TextEditingController();
   TextEditingController lastname = TextEditingController();
   TextEditingController middlename = TextEditingController();
@@ -75,94 +77,90 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
   }
 
   void onListen() => setState(() {});
-  
+
   @override
   Widget build(BuildContext context) {
- var mediquery = MediaQuery.of(context);
-    double? appbarsize = mediquery.padding.top + AppBar().preferredSize.height + 50;
+    var mediquery = MediaQuery.of(context);
+    double? appbarsize =
+        mediquery.padding.top + AppBar().preferredSize.height + 50;
     return GestureDetector(
-      onTap: ()=> FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         backgroundColor: const Color(0xffFFFFFF),
         appBar: AppBar(
-            backgroundColor: gcash_blue1,
-            title: const Text('Sign up'),
-            leading: IconButton(
-                onPressed: () {
-                  Get.back();
-                },
-                icon: const FaIcon(FontAwesomeIcons.angleLeft,
-                    color: purewhitebackground)),
-          ),
+          backgroundColor: gcash_blue1,
+          title: const Text('Sign up'),
+          leading: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: const FaIcon(FontAwesomeIcons.angleLeft,
+                  color: purewhitebackground)),
+        ),
         body: Column(
           children: [
-         
-             Container(
-              padding: EdgeInsets.symmetric(horizontal:20,vertical: 12),
-               child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SmoothPageIndicator(
-                            controller: pagecontroller,
-                            count: 3,
-                            effect: const ExpandingDotsEffect(
-                                spacing: 8,
-                                dotColor: input_background_ligt,
-                                activeDotColor: gcash_blue1)),
-                        Container(
-                          child: Text(
-                            '${pageindex + 1}/3',
-                            style: Get.textTheme.bodyText1!.copyWith(
-                                fontFamily: 'Roboto',
-                                fontWeight: FontWeight.w600,
-                                color: gcash_blue1),
-                          ),
-                        ),
-                      ],
-                    ),
-             ),
-            Expanded(
-             
-              child: SingleChildScrollView(
-                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-              child: Column(  
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  
+                  SmoothPageIndicator(
+                      controller: pagecontroller,
+                      count: 3,
+                      effect: const ExpandingDotsEffect(
+                          spacing: 8,
+                          dotColor: input_background_ligt,
+                          activeDotColor: gcash_blue1)),
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20,),
+                    child: Text(
+                      '${pageindex + 1}/3',
+                      style: Get.textTheme.bodyText1!.copyWith(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w600,
+                          color: gcash_blue1),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+                child: SingleChildScrollView(
+              keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+              child: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20,
+                    ),
                     height: MediaQuery.of(context).size.height - appbarsize,
                     child: PageView(
-                  
-                  onPageChanged: (int index) {
-                    setState(() {
-                      pageindex = index;
-                    });
-                  },
-                  physics: const NeverScrollableScrollPhysics(),
-                  controller: pagecontroller,
-                  children: [
-                    firstStepBuilder(),
-                    secondStepBuilder(),
-                    thirStepBuilder()
-                  ],
-                ),
+                      onPageChanged: (int index) {
+                        setState(() {
+                          pageindex = index;
+                        });
+                      },
+                      physics: const NeverScrollableScrollPhysics(),
+                      controller: pagecontroller,
+                      children: [
+                        firstStepBuilder(),
+                        secondStepBuilder(),
+                        thirStepBuilder()
+                      ],
+                    ),
                   ),
                 ],
               ),
             ))
-
-                
-                
-            
           ],
         ),
-         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-          floatingActionButton: floatingButtonBuilder(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: floatingButtonBuilder(),
       ),
     );
   }
-   Container floatingButtonBuilder() {
+
+  Widget floatingButtonBuilder() {
     return Container(
       color: const Color(0xffFFFFFF),
       padding: const EdgeInsets.symmetric(
@@ -216,17 +214,32 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
                           key: const Key('k2'),
                         ),
                 ),
-                Expanded(
-                  child: Container(
-                    child: ElevatedButton(
+                Obx(() {
+                  
+                  return Expanded(
+                    child:(authcontroller.isSendingVerification.isTrue 
+                    ? Container(
+                      child: Center(
+                        child: SizedBox(
+                          height: 24,
+                          width: 24,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: gcash_blue1,
+                          ),
+                        ),
+                      ),
+                    )
+                    :  ElevatedButton(
                       onPressed: () {
                         checkAndProceed();
                       },
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12,),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 12,
+                        ),
                         child: Text(
-                          pageindex == 2? 
-                          'Create Account' : "Continue",
+                          pageindex == 2 ? 'Create Account' : "Continue",
                           style: lightheadline6.copyWith(fontSize: 18),
                         ),
                       ),
@@ -238,15 +251,15 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
                                   RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(buttoncircular),
                           ))),
-                    ),
-                  ),
-                ),
+                    ))
+                  );
+                }),
               ],
             ),
             const VerticalSpace(height: 16),
             GestureDetector(
               onTap: () {
-                Get.back();
+               Get.off(()=> const SigninScreenNumber());
               },
               child: Text(
                 'Login to your existing account',
@@ -264,48 +277,35 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
   void checkAndProceed() {
     switch (pageindex) {
       case 0:
-        // if(firstname.text.isEmpty || lastname.text.isEmpty || date
-        // == null ){
-        //   App.showChecker(context, 'Please fill out all fields before pressiong continue');
-        // }else{
-        //      proceed();
-        // }
-        proceed();
+        if(firstname.text.isEmpty || lastname.text.isEmpty || date
+        == null ){
+          App.showChecker(context, 'Please fill out all fields to continue');
+        }else{
+
+          authcontroller.firstname = firstname.text;
+          authcontroller.lastname = lastname.text;
+          authcontroller.birthday = birthday.toString();
+          proceed();
+        }
+        break;
+        case 1:
+        if (authcontroller.region == null ||
+            authcontroller.province == null ||
+            authcontroller.city == null ||
+            authcontroller.barangay == null) {
+            App.showChecker(context, 'Please fill out all fields to continue');
+        } else {
+          proceed();
+        }
         break;
 
-      case 1:
-        // if (authcontroller.region == null ||
-        //     authcontroller.province == null ||
-        //     authcontroller.city == null ||
-        //     authcontroller.barangay == null) {
-        //   App.showChecker(
-        //       context, 'Please fill out all fields before pressiong continue');
-        // } else {
-        //   proceed();
-        // }
-         proceed();
-
-        break;
-
-      case 2:      
-          authcontroller.registerUser(phonenumber.text);
+      case 2:
+        if (phonenumber.text.isEmpty) {
+          App.showChecker(context, 'Phone number is empty');
+        }
+        authcontroller.sendVerification(phonenumber.text, ProcessType.signup);
         break;
     }
-
-    //check page 3
-    // if (pageindex >= 2) {
-    //   Get.to(
-    //     () => const TermsAndCondition(),
-    //     fullscreenDialog: true,
-    //   );
-    // }
-    // //check first step
-    // if (pageindex == 0) {
-    //   if (firstname.text.isEmpty && lastname.text.isEmpty && birthday == null) {
-    //   } else {}
-    // }
-
-    //check page 1
   }
 
   void proceed() {
@@ -319,7 +319,7 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             VerticalSpace(height: 16),
+            VerticalSpace(height: 16),
             Text('Login Number'.toUpperCase(),
                 style: TextStyle(
                     fontSize: 20,
@@ -339,16 +339,17 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
             //   color: Colors.red,
             //   width: double.infinity,
             // ),
-            VerticalSpace(height: 24),
 
             Column(
               children: [
-
-                Lottie.asset('assets/images/97981-hand-holding-phone.json', height: 170),
+                Lottie.asset('assets/images/97981-hand-holding-phone.json',
+                    height: 170),
                 VerticalSpace(height: 24),
                 Text('We will send you one Time Password '),
+                VerticalSpace(height: 4),
                 Text(
                   'Enter Mobile Number',
+
                   style: TextStyle(color: Colors.grey[500]),
                 ),
                 // Image.asset(
@@ -356,61 +357,53 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
                 //   width: 34,
                 //   height: 34,
                 // ),
-            TextFormField(
-              inputFormatters: [
-                 FilteringTextInputFormatter.digitsOnly
-              ],
-              onChanged: (value){
-                  authcontroller.phonenumber = value;
-              },
-              controller: phonenumber,
-              maxLength: 10,
-            textAlignVertical: TextAlignVertical.center,
-      keyboardType: TextInputType.phone,
-      textInputAction: TextInputAction.done,
-
-      decoration: InputDecoration(
-        
-        isDense: true,
-
-        prefixIcon: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-              Image.asset(
-                'assets/images/philippines.png',
-                width: 34,
-                height: 34,
-              ),
-              HorizontalSpace(width: 6),
-              Text('+63'),
-              HorizontalSpace(width: 8),
-            
-          ],
-        )
-      ),
-    
-               
+                TextFormField(
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  onChanged: (value) {
+                    authcontroller.phonenumber = value;
+                  },
+                  controller: phonenumber,
+                  maxLength: 10,
+                  textAlignVertical: TextAlignVertical.center,
+                  keyboardType: TextInputType.phone,
+                  textInputAction: TextInputAction.done,
+                  decoration: InputDecoration(
+                      isDense: true,
+                      prefixIcon: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Image.asset(
+                            'assets/images/philippines.png',
+                            width: 34,
+                            height: 34,
+                          ),
+                          HorizontalSpace(width: 6),
+                          Text('+63'),
+                          HorizontalSpace(width: 8),
+                        ],
+                      )),
                 ),
-                if(authcontroller.phonenumber.length == 10)
-              infoIcon(FontAwesomeIcons.check , 'Everything seems good', Colors.green[600]),
-              if(authcontroller.phonenumber !="" && authcontroller.phonenumber.length != 10 )
-              infoIcon(FontAwesomeIcons.exclamationCircle, 'Invalid number length', Colors.red[400])
-              
-              ],    
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 5),
-              height: 200,
-              width: double.infinity,
-            ),
-            Container(
-              margin: EdgeInsets.only(bottom: 5),
-              height: 200,
-              width: double.infinity,
-            ),
 
-         
+                if (authcontroller.phonenumber.length == 10)
+                InfoIcon(icon: FontAwesomeIcons.check, color: Colors.green[600], message: 'Everything seems good'),
+                 
+                if (authcontroller.phonenumber != "" &&
+                    authcontroller.phonenumber.length != 10)
+                InfoIcon(icon: FontAwesomeIcons.exclamationCircle, color: Colors.red[400], message: 'Invalid number length'),
+                
+              ],
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: 5),
+              height: 200,
+              width: double.infinity,
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: 5),
+              height: 200,
+              width: double.infinity,
+            ),
 
             // const VerticalSpace(height: 12),
             // TextFormField(
@@ -522,15 +515,24 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
     );
   }
 
-  Row infoIcon(IconData icon, String message, Color? color) {
-    return Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FaIcon(icon, color: color,size: 20,), HorizontalSpace(width: 4),
-                  Flexible(child: Text(message, style: TextStyle(fontSize: 13, color: color),)),
-                ],
-              );
-  }
+  // Row infoIcon(IconData icon, String message, Color? color) {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.center,
+  //     children: [
+  //       FaIcon(
+  //         icon,
+  //         color: color,
+  //         size: 20,
+  //       ),
+  //       HorizontalSpace(width: 4),
+  //       Flexible(
+  //           child: Text(
+  //         message,
+  //         style: TextStyle(fontSize: 13, color: color),
+  //       )),
+  //     ],
+  //   );
+  // }
 
   Widget secondStepBuilder() {
     return GetBuilder<Authcontroller>(
@@ -546,7 +548,6 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
                   fit: BoxFit.cover,
                 ),
               ),
-             
               SizedBox(
                 child: OutlinedButton(
                     style: OutlinedButton.styleFrom(
@@ -577,9 +578,9 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
               //if(controller.province==null)
               BlueCard(
                   content:
-                      'Select region , province, city, and baranggay before proceedigng the next step. '),
+                      'Select region , province, city, and baranggay before going to the next step. '),
 
-              WhitLine(thickness: 2),
+              WhiteLine(thickness: 2),
               Row(
                 children: [
                   Container(
@@ -771,7 +772,10 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
                 color: Colors.grey[900])),
         const VerticalSpace(height: 24),
         Textfield(
+            
             controller: firstname,
+            
+            
             type: TextInputType.text,
             action: TextInputAction.next,
             label: 'First name'),
@@ -813,7 +817,7 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
             birthday == null
                 ? const Datefieldcontent(text: 'mm/dd/yyyy')
                 : Datefieldcontent(
-                    text: DateFormat.yMMMd().format(DateTime.now()))
+                    text: DateFormat.yMMMd().format(birthday as DateTime))
           ],
         ),
       );
@@ -828,8 +832,9 @@ class _SignupScreenState extends State<SignupScreen>  with TickerProviderStateMi
   void setBirthDate() {
     setState(() {
       birthday = date;
-    });
 
+    });
+  
     Get.back();
   }
 }
